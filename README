@@ -1,6 +1,16 @@
 This is a demo app to help me answer some quetions.
 
+SETUP:
+$ ruby ticker_talker.rb # to start pushing data to port 9100
+$ ruby ticker_listener.rb # to start processing data from port 9100
+
+# At this point, ticker_lister.rb is using nanite to add messages to the exchange.  However, no nanite agents have been started.
+
+$ cd ticker_agent
+$ nanite -t ticker # start the nanite agent to process off the exchange.
+
 QUESTION:
-so when i call Nanite.request("/ticker/handle", data) to an agent
+So when i call Nanite.request("/ticker/handle", data) to an agent
 if there are zero agents running, it seems that those requests get lost
 is that the way its supposed to work?  i thought that Nanite.request("/ticker/handle", data) will save the requests into a queue (the exchange) and whenever i fire up my nanite actors later, it will pick it up from the exchange, and not lose the requests...
+
