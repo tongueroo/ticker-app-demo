@@ -11,7 +11,7 @@ class Processor
   
   def run
     puts "Processor#run"
-    @logger.fatal(@data)
+    @logger.info(@data)
   end
 end
 
