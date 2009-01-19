@@ -30,10 +30,10 @@ module TickerListener
     dispatcher = TickerDispatcher.new
     dispatcher.handle(data)
     
-    puts "done operating on the data"
+    puts "done operating on the data: #{data.inspect}"
   end
 end
 
 EM.run do
-  EM.start_server "127.0.0.1", 9100, TickerListener
+  EM.start_server "localhost", 9100, TickerListener
 end

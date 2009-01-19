@@ -7,14 +7,10 @@ require 'eventmachine'
 
 module TickerTalker
   def post_init
-    send_data "GET /\r\n\r\n"
     file = open("#{File.dirname(__FILE__)}/data.xml")
     @data = file.read
     puts "sending data : #{@data}"
-  end
-  
-  def receive_data(data)
-    @data << data
+    send_data @data
   end
 end
 
