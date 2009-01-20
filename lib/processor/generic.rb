@@ -8,7 +8,7 @@ require here + '/manager'
 module Processor
   class Generic
     def initialize(data)
-      puts "data : #{data.inspect}"
+      puts "Processor::Generic data : #{data.inspect}"
       # @data = data
       # @db = CouchRest.database!("http://127.0.0.1:5984/pa_sports")
       @logger = Logger.new(File.expand_path("#{File.dirname(__FILE__)}/../../log/processor-generic.txt"))
