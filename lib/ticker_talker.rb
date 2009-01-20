@@ -7,7 +7,7 @@ require 'eventmachine'
 
 module TickerTalker
   def post_init
-    file = open("#{File.dirname(__FILE__)}/data.xml")
+    file = open("#{File.dirname(__FILE__)}/processor/fixtures/scoreboard.xml")
     @data = file.read
     puts "sending data : #{@data}"
     send_data @data
@@ -16,7 +16,7 @@ end
 
 EM.run do
   EM.add_periodic_timer(1) do
-    EM.connect 'localhost', 9100, TickerTalker
+    EM.connect 'localhost', 9600, TickerTalker
   end
 end
 
