@@ -11,7 +11,7 @@ module Processor
       puts "data : #{data.inspect}"
       # @data = data
       # @db = CouchRest.database!("http://127.0.0.1:5984/pa_sports")
-      @logger = Logger.new("#{File.dirname(__FILE__)}/log/processor-scoreboard.txt")
+      @logger = Logger.new(File.expand_path("#{File.dirname(__FILE__)}/../../log/processor-generic.txt"))
     end
     
     def run
@@ -41,6 +41,6 @@ end
 Processor::Manager.register(Processor::Generic)
 
 if $0 == __FILE__
-  processor = Processor::Generic.new(open("#{File.dirname(__FILE__)}/fixtures/scoreboard.xml").read)
+  processor = Processor::Generic.new(open("#{File.dirname(__FILE__)}/fixtures/generic.xml").read)
   processor.run
 end

@@ -6,7 +6,6 @@ require 'nanite'
 
 here = File.dirname(__FILE__)
 # require here + "/processor/manager"
-# require here + "/processor/scoreboard"
 # require here + "/processor/generic"
 
 class TickerDispatcher
@@ -17,7 +16,7 @@ class TickerDispatcher
                  :vhost => '/nanite', :log_level => 'info'
 
     Nanite.request("/ticker/handle", data) do |res|
-      p res
+      puts res
     end
   end
 end
@@ -33,6 +32,8 @@ end
 
 module TickerRunner
   def start(opts)
+    puts "starting ticker listener..."
+    
     @host = opts[:host] || '127.0.0.1'
     @port = opts[:port] || 9600
     

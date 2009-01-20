@@ -7,6 +7,7 @@ class Ticker < Nanite::Actor
   expose :handle, :time
 
   def handle(data)
+    puts "hi from ticker/handle"
     Processor::Manager.processors.each do |klass|
       if (klass.process?)
         puts "processing data with processor: #{klass.name}"
