@@ -22,17 +22,16 @@ Thanks careo for answering this.  Currently nanite mapper send requests directly
 QUESTON2:
 10:30 tongueroo: so if i some of the actors require dependencies, do i have to require the dependencies where i call the mapper also, Nanite.start  
 
-
-
-# start ticker talker, this sends data to host: localhost, port 9600 every second
+SETUP2:
+1. start ticker talker, this sends data to host: localhost, port 9600 every second
 tung@walle ~/Sites/br/ticker_app/lib $ ruby ticker_talker.rb 
 sending data : <data>scores</data>
 sending data : <data>scores</data>
 
-# start nanite actor agent, this is the worker that will handle the data that will be passed onto it from ticker_listener
+2. start nanite actor agent, this is the worker that will handle the data that will be passed onto it from ticker_listener
 tung@walle ~/Sites/br/ticker_app/lib/nanite_agents $ nanite
 
-# start ticker listener to process the data that is being sent from ticker_talker
+3. start ticker listener to process the data that is being sent from ticker_talker
 tung@walle ~/Sites/br/ticker_app $ ./bin/ticker 
 starting ticker listener...
 done operating on the data
@@ -65,3 +64,11 @@ tung@walle ~/Sites/br/ticker_app $
 
 
 
+So, Ig et that error that Procesosr is not defined and it looks like its coming form the mapper Nanite.start call in 
+lib/ticker_listener.rb:14:    @@started ||= Nanite.start :mapper => true, :host => 'localhost',
+
+What whenever I uncomment out there require for the dependencies in the ticker_listener.b
+lib/ticker_listener.rb:8: require here + "/processor/manager"
+lib/ticker_listener.rb:9: require here + "/processor/generic"
+
+Then I dont get this error.
