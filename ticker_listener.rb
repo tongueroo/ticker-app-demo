@@ -4,8 +4,6 @@ require 'logger'
 require 'nanite'
 
 class TickerDispatcher
-  @@i = 0
-  
   def logger
     @logger ||= Logger.new("#{File.dirname(__FILE__)}/log/dispatcher-log.txt")
   end
@@ -19,9 +17,6 @@ class TickerDispatcher
     Nanite.request("/ticker/handle", data) do |res|
       p res
     end
-    
-    @@i += 1
-    logger.info("@@i : #{@@i}")
   end
 end
 
