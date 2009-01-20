@@ -31,23 +31,12 @@ sending data : <data>scores</data>
 2. start nanite actor agent, this is the worker that will handle the data that will be passed onto it from ticker_listener
 tung@walle ~/Sites/br/ticker_app/lib/nanite_agents $ nanite
 
-3. start ticker listener to process the data that is being sent from ticker_talker
+3A. start ticker listener to process the data that is being sent from ticker_talker, with the required dependencies commented out
 tung@walle ~/Sites/br/ticker_app $ ./bin/ticker 
 starting ticker listener...
 done operating on the data
 done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
-done operating on the data
+...
 done operating on the data
 /opt/local/lib/ruby/gems/1.8/gems/nanite-0.2.0/lib/nanite/marshal.rb:17:in `load': undefined class/module Processor:: (ArgumentError)
         from /opt/local/lib/ruby/gems/1.8/gems/nanite-0.2.0/lib/nanite/marshal.rb:17:in `load_packet'
@@ -63,12 +52,32 @@ done operating on the data
 tung@walle ~/Sites/br/ticker_app $ 
 
 
+3B. start ticker listener to process the data that is being sent from ticker_talker, with the required dependencies NOT commented out
+tung@walle ~/Sites/br/ticker_app $ ./bin/ticker 
+starting ticker listener...
+done operating on the data
+done operating on the data
+done operating on the data
+done operating on the data
+done operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Generic
+done operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Generic
+done operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Generic
+done operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Generic
+done operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Genericdone operating on the data
+d862f0a68ecb2371e87d47b60c7cea0cProcessor::Generic
 
-So, Ig et that error that Procesosr is not defined and it looks like its coming form the mapper Nanite.start call in 
+
+
+
+So, I get that error that Processor is not defined and it looks like its coming form the mapper Nanite.start call in 
 lib/ticker_listener.rb:14:    @@started ||= Nanite.start :mapper => true, :host => 'localhost',
 
-What whenever I uncomment out there require for the dependencies in the ticker_listener.b
+What whenever I uncomment out there require for the dependencies in the ticker_listener.rb
 lib/ticker_listener.rb:8: require here + "/processor/manager"
 lib/ticker_listener.rb:9: require here + "/processor/generic"
-
 Then I dont get this error.

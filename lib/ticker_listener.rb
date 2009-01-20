@@ -5,8 +5,8 @@ require 'logger'
 require 'nanite'
 
 here = File.dirname(__FILE__)
-require here + "/processor/manager"
-require here + "/processor/generic"
+# require here + "/processor/manager"
+# require here + "/processor/generic"
 
 class TickerDispatcher
   def handle(data)
